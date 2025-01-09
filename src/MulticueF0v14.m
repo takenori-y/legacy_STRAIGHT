@@ -535,7 +535,7 @@ damp=damp./abs(pm1);
 
 fxx=f0floor*2.0.^((0:nn-1)/nvo)'*2*pi;
 mmp=0*dslp;
-[c1,c2b]=znrmlcf2(1);
+[c1,c2b]=znrmlcf2(shiftm);
 for ii=1:nn
 	c2=c2b*(fxx(ii)/2/pi)^2;
 	cff=damp(ii,:)/fxx(ii)*2*pi*0;
@@ -1082,13 +1082,13 @@ slp=([pif(2:fftl/2+1,:);pif(fftl/2+1,:)]-pif)/(fs/fftl*2*pi);
 dslp=([dpif(2:fftl/2+1,:);dpif(fftl/2+1,:)]-dpif)/(fs/fftl*2*pi)*fs;
 mmp=slp*0;
 
-[c1,c2]=znrmlcf3(shiftm);
+[c1,c2b]=znrmlcf3(shiftm);
 fxx=((0:fftl/2)+0.5)/fftl*fs*2*pi;
 
 %--- calculation of relative noise level
 
 for ii=1:fftl/2+1;
-	c2=c2*(fxx(ii)/2/pi)^2;
+	c2=c2b*(fxx(ii)/2/pi)^2;
 	mmp(ii,:)=(dslp(ii,:)/sqrt(c2)).^2+(slp(ii,:)/sqrt(c1)).^2;
 end;
 
